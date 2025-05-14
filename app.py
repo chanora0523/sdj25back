@@ -1,6 +1,7 @@
 from flask import Flask,request,josnify,abort
 import dbm
 import janome
+import flask_cors
 
 app = ( __name__)
 
@@ -38,15 +39,15 @@ def post():
 
 @app.route('/v1/messages',methods=['GET'])
 def get_all():
-    
+
     msgs = []
     with dbm.open('messeage.dbm','c') as db:
-        for k in db:
+        for k in db.keys():
             if str(k) == b'id': continue
             msgs.append(k,db[k].decode('utf-8'))
-    
-    return jsonify(msgs)
+    print(msgs)
+    return jsonify(msgs),200
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0',debug = True)#外からのアクセスのため
