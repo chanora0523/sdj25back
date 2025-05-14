@@ -1,9 +1,10 @@
-from flask import Flask,request,josnify,abort
+from flask import Flask,request,jsonify,abort
 import dbm
-import janome
-import flask_cors
+from janome.tokenfilter import Tokenizer
+from flask_cors import CORS
 
-app = ( __name__)
+app = Flask( __name__)
+CORS(app)
 
 @app.route('/')
 def root():
@@ -35,7 +36,7 @@ def post():
         db[str(id)] = data['message']
         
 
-    return josnify({"id": id} )
+    return jsonify({"id": id} )
 
 @app.route('/v1/messages',methods=['GET'])
 def get_all():
