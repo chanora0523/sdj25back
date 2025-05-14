@@ -1,6 +1,6 @@
 from flask import Flask,request,jsonify,abort
 import dbm
-from janome.tokenfilter import Tokenizer
+from janome.tokenizer import Tokenizer
 from flask_cors import CORS
 
 app = Flask( __name__)
